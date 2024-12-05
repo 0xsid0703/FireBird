@@ -429,7 +429,7 @@ const TokenPage = () => {
             </tr>
             <tr className="text-gray-500 text-base">
               <th
-                className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
+                className="border border-border cursor-pointer hover:text-primary  group select-none"
                 onClick={() => handleSort("sol_amount")}
               >
                 <span className="flex flex-row items-center gap-1 justify-center">
@@ -448,7 +448,7 @@ const TokenPage = () => {
                 </span>
               </th>
               <th
-                className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
+                className="border border-border cursor-pointer hover:text-primary  group select-none"
                 onClick={() => handleSort("token_amount")}
               >
                 <span className="flex flex-row items-center gap-1 justify-center">
@@ -467,7 +467,7 @@ const TokenPage = () => {
                 </span>
               </th>
               <th
-                className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
+                className="border border-border cursor-pointer hover:text-primary  group select-none"
                 onClick={() => handleSort("token_burnt")}
               >
                 <span className="flex flex-row items-center gap-1 justify-center">
@@ -486,7 +486,7 @@ const TokenPage = () => {
                 </span>
               </th>
               <th
-                className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
+                className="border border-border cursor-pointer hover:text-primary  group select-none"
                 onClick={() => handleSort("percentage")}
               >
                 <span className="flex flex-row items-center gap-1 justify-center">
