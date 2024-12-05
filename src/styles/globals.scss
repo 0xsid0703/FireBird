@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles/globals.css */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+
+    --input: 214.3 31.8% 91.4%;
+
+    --ring: 222.2 84% 4.9%;
+
+    --chart-1: 12 76% 61%;
+
+    --chart-2: 173 58% 39%;
+
+    --chart-3: 197 37% 24%;
+
+    --chart-4: 43 74% 66%;
+
+    --chart-5: 27 87% 67%;
+
+    --radius: 0.5rem;
+
+    --odd-color: 0, 0%, 91.4%;
+    --even-color: 0, 0%, 100%;
+    --badge-color: 44, 96%, 56%;
+
+    --hover-color: 0, 0%, 91.4%;
+  }
+  .dark {
+    --background: 240, 4.7%, 3.92%; /* Near-black background */
+    --foreground: 0 0% 90%; /* Light gray text */
+
+    --card: 0 0% 15%; /* Dark gray card background */
+    --card-foreground: 0 0% 90%; /* Light text on cards */
+
+    --popover: 0 0% 15%; /* Dark gray popover background */
+    --popover-foreground: 0 0% 90%; /* Light text in popovers */
+
+    --primary: 0 0% 90%; /* Light gray for primary elements */
+    --primary-foreground: 0 0% 10%; /* Near-black for primary text */
+
+    --secondary: 0 0% 20%; /* Dark gray for secondary elements */
+    --secondary-foreground: 0 0% 90%; /* Light gray for secondary text */
+
+    --muted: 0 0% 25%; /* Muted dark gray */
+    --muted-foreground: 0 0% 70%; /* Medium gray for muted text */
+
+    --accent: 0 0% 90%; /* Light gray accent */
+    --accent-foreground: 0 0% 10%; /* Near-black accent text */
+
+    --destructive: 0 0% 30%; /* Dark gray for destructive actions */
+    --destructive-foreground: 0 0% 90%; /* Light text for destructive actions */
+
+    --border: 0 0% 20%; /* Dark gray borders */
+    --input: 0 0% 20%; /* Dark gray input fields */
+
+    --ring: 0 0% 100%; /* White focus ring */
+
+    /* Updated chart colors for grayscale theme */
+    --chart-1: 0 0% 50%; /* Medium gray */
+    --chart-2: 0 0% 40%; /* Darker gray */
+    --chart-3: 0 0% 60%; /* Light gray */
+    --chart-4: 0 0% 30%; /* Dark gray */
+    --chart-5: 0 0% 70%; /* Very light gray */
+
+    --odd-color: 240.0, 9.1%, 6.5%;
+    --even-color: 240, 4.7%, 3.92%;
+    --hover-color: 240.0, 9.1%, 6.5%;
+    --badge-color: 44, 96%, 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+input {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    opacity: 1;
+    background: transparent;
+    border-left: 1px solid hsl(var(--bc) / 0.2);
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    right: 0;
+    position: absolute;
+    width: 20px;
+  }
+  &::-webkit-inner-spin-button:hover,
+  &::-webkit-outer-spin-button:hover {
+    background-color: hsl(var(--b2) / 0.8);
+  }
+  &::-webkit-inner-spin-button:active,
+  &::-webkit-outer-spin-button:active {
+    background-color: hsl(var(--b3) / 0.8);
+  }
+}
+
+
+/* Default light mode styles */
+.filter-calendar {
+  @apply bg-background text-gray-800 border border-border rounded-lg shadow-lg;
+}
+
+.react-datepicker__header {
+  @apply bg-background p-2 rounded-t-lg;
+}
+
+.react-datepicker__day {
+  @apply p-2 hover:bg-gray-200 cursor-pointer;
+}
+.dark .react-datepicker__header .react-datepicker__current-month, .dark .react-datepicker__day-names .react-datepicker__day-name {
+  @apply text-black;
+}
+.react-datepicker__day--selected {
+  @apply bg-blue-500 text-black;
+}
+
+.react-datepicker__day--disabled {
+  @apply text-gray-400;
+}
+
+.react-datepicker__day--today {
+  @apply font-bold;
+}
+
+/* Dark mode styles */
+.dark .filter-calendar {
+  @apply bg-background text-white border border-border;
+}
+
+.dark .react-datepicker__header {
+  @apply bg-background p-2 rounded-t-lg border-b border-border;
+}
+
+.dark .react-datepicker__header .react-datepicker__current-month, .dark .react-datepicker__day-names .react-datepicker__day-name {
+  @apply text-white;
+}
+
+.dark .react-datepicker__day {
+  @apply p-2 hover:bg-gray-600 cursor-pointer text-white;
+}
+
+.dark .react-datepicker__day--selected {
+  @apply bg-blue-600 text-white;
+}
+
+.dark .react-datepicker__day--disabled {
+  @apply text-gray-400;
+}
+
+.dark .react-datepicker__day--today {
+  @apply font-bold text-white bg-gray-600;
+}
+
+/* Optional: Hide the calendar triangle in both modes */
+.react-datepicker__triangle {
+  @apply hidden;
+}
+
+.react-datepicker-wrapper {
+  @apply w-1/2;
+}
