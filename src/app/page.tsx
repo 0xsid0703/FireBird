@@ -13,7 +13,7 @@ import { FaArrowDown, FaArrowUp, FaFilter } from "react-icons/fa";
 import "react-loading-skeleton/dist/skeleton.css";
 import Skeleton from "react-loading-skeleton";
 import { BiFilter, BiSearch } from "react-icons/bi";
-import FilterModal from "@/components/FilterModal";
+import HomeModal from "@/components/modal/HomeModal";
 import { motion } from "framer-motion";
 import { parse, isValid } from "date-fns";
 
@@ -662,7 +662,7 @@ const PublicSells = () => {
         </tbody>
       </motion.table>
       {isModalOpen && (
-        <FilterModal
+        <HomeModal
           onClose={closeModal}
           onSubmit={updateInputValues}
           filters={filters}

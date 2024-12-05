@@ -61,6 +61,7 @@
     --badge-color: 44, 96%, 56%;
 
     --hover-color: 0, 0%, 91.4%;
+    --grey-color: #c5c5c5;
   }
   .dark {
     --background: 240, 4.7%, 3.92%; /* Near-black background */
@@ -103,6 +104,7 @@
     --even-color: 240, 4.7%, 3.92%;
     --hover-color: 240.0, 9.1%, 6.5%;
     --badge-color: 44, 96%, 56%;
+    --grey-color: #27272A;
   }
 }
 
@@ -202,4 +204,15 @@ input {
 
 .react-datepicker-wrapper {
   @apply w-1/2;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

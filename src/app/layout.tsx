@@ -8,6 +8,9 @@ import ClientLayout from "./ClientLayout";
 export const metadata: Metadata = {
   title: "Firebird",
   description: "MVP",
+  icons: {
+    icon: "/logo-light.png",
+  },
 };
 
 export default function RootLayout({

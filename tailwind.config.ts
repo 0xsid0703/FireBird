@@ -11,6 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        greyColor: "var(--grey-color)",
         badgeColor: "hsl(var(--badge-color))",
         hoverColor: "hsl(var(--hover-color))",
         evenColor: "hsl(var(--even-color))",

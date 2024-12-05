@@ -10,6 +10,8 @@ const useDarkMode = () => {
     } else {
       document.documentElement.classList.remove("dark");
     }
+    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+    window.dispatchEvent(new Event("storage"));
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {

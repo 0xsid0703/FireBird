@@ -12,13 +12,13 @@ type FilterProps = {
   price: [string, string];
 };
 
-interface FilterModalProps {
+interface HomeModalProps {
   onClose: () => void;
   onSubmit: (values: FilterProps) => void;
   filters: FilterProps;
 }
 
-const FilterModal = ({ onClose, onSubmit, filters }: FilterModalProps) => {
+const HomeModal = ({ onClose, onSubmit, filters }: HomeModalProps) => {
   const [sell_at, setSellAt] = useState<[string, string]>(filters["sell_at"]);
   const [token_amount, setTokenAmount] = useState<[string, string]>(
     filters["token_amount"]
@@ -239,4 +239,4 @@ const FilterModal = ({ onClose, onSubmit, filters }: FilterModalProps) => {
   );
 };
 
-export default FilterModal;
+export default HomeModal;
