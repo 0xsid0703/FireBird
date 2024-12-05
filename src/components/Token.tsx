@@ -13,7 +13,7 @@ type Props = {
 const Token = ({ id, icon, name, price, symbol }: Props) => {
   return (
     <a
-      className="w-full flex flex-row items-center border border-border rounded-md gap-2 py-1 px-2"
+      className="w-full flex flex-row items-center border border-border rounded-md gap-2 py-1 px-2 hover:bg-evenColor bg-transparent"
       href={`/builders/${id}`}
     >
       <Image
