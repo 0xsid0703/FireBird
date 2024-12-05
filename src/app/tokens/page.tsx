@@ -577,7 +577,7 @@ const TokenPage = () => {
                     <td
                       className={clsx(
                         index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
-                        "hover:bg-hoverColor border-b-1 border-b-border sticky right-0 z-10"
+                        "hover:bg-hoverColor border-b-1 border-b-border sticky right-0 z-10 flex justify-center"
                       )}
                     >
                       <button className="flex flex-row gap-1 items-center bg-greyColor py-1 px-4 rounded-md">

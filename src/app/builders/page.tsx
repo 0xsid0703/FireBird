@@ -224,7 +224,7 @@ const BuildersPage = () => {
       <div className="max-w-7xl mx-auto mt-10 flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <div className="text-xl">The tokens with Firebird</div>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {tokens.map((token: TokenSummary, index: number) => (
               <Token {...token} key={index} />
             ))}
@@ -232,7 +232,7 @@ const BuildersPage = () => {
         </div>
         <div className="flex flex-col gap-2">
           <div className="text-xl">The tokens on the waitlist</div>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {waitlist.map((token: TokenSummary, index: number) => (
               <Token {...token} key={index} />
             ))}
@@ -240,7 +240,7 @@ const BuildersPage = () => {
         </div>
         <div className="flex flex-col gap-2">
           <div className="text-xl">Firebird Friends</div>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {firebird_friends.map((token: TokenSummary, index: number) => (
               <Token {...token} key={index} />
             ))}
