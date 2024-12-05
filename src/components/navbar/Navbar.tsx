@@ -64,7 +64,7 @@ export function Navbar() {
                   src={"/logo-light.png"}
                   width={64}
                   height={64}
-                  className="w-16 h-16"
+                  className="w-16 h-16 hidden md:block"
                   alt=""
                 />
               ) : (
@@ -72,7 +72,7 @@ export function Navbar() {
                   src={"/logo-dark.png"}
                   width={64}
                   height={64}
-                  className="w-16 h-16"
+                  className="w-16 h-16 hidden md:block"
                   alt=""
                 />
               )}

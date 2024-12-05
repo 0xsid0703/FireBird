@@ -353,12 +353,12 @@ const TokenPage = () => {
   };
   return (
     <div className="py-8">
-      <div className="mx-5 flex flex-row justify-between">
+      <div className="mx-5 flex flex-col md:flex-row items-center md:justify-between">
         <div className="text-xl font-semibold">Tokens Practicing Firebird</div>
-        <div className="flex justify-end flex-row gap-3">
+        <div className="flex md:justify-end md:flex-row flex-col md:gap-3 gap-1 md:w-fit w-full">
           <div className="relative">
             <button
-              className="flex flex-row text-base items-center hover:text-primary text-gray-500 px-3 py-1 border border-gray-500 hover:border-primary rounded-md"
+              className="flex flex-row text-base items-center hover:text-primary text-gray-500 px-3 py-1 border border-gray-500 hover:border-primary rounded-md w-full md:w-fit"
               onClick={openModal}
             >
               <BiFilter />
@@ -370,7 +370,7 @@ const TokenPage = () => {
               </div>
             )}
           </div>
-          <div className="flex flex-row gap-1 border border-gray-500 rounded-md text-gray-500 px-3 py-1 items-center">
+          <div className="flex flex-row gap-1 border border-gray-500 rounded-md text-gray-500 px-3 py-1 items-center w-full md:w-fit">
             <BiSearch size={16} />
             <input
               name="search"
@@ -381,7 +381,7 @@ const TokenPage = () => {
               }}
             ></input>
           </div>
-          <div className="flex flex-row items-center border border-gray-500 rounded-md text-gray-500 w-40">
+          <div className="flex flex-row items-center border border-gray-500 rounded-md text-gray-500 w-full md:w-40">
             <div className="bg-greyColor w-2/5 text-white flex flex-row gap-1 items-center justify-center h-full rounded-l-md border border-greyColor select-none">
               <FaBoltLightning fill="#f0c048" />
               BUY
@@ -396,184 +396,207 @@ const TokenPage = () => {
           </div>
         </div>
       </div>
-      <motion.table
-        className="table text-center border-0 mt-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <thead>
-          <tr className="text-gray-500 text-base">
-            <th rowSpan={2} className="border border-border">
-              Token
-            </th>
-            <th colSpan={2} className="border border-border">
-              Inside Firebird Protocol
-            </th>
-            <th colSpan={2} className="border border-border">
-              Burnt
-            </th>
-            <th rowSpan={2} className="border border-border">
-              Transactions
-            </th>
-            <th rowSpan={2} className="border border-border">
-              Quick buy
-            </th>
-          </tr>
-          <tr className="text-gray-500 text-base">
-            <th
-              className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("sol_amount")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["sol_amount"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
-                SOL
-              </span>
-            </th>
-            <th
-              className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("token_amount")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["sol_amount"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
+      <div className="relative overflow-x-auto max-w-full">
+        <motion.table
+          className="table text-center border-0 mt-2 w-full border-collapse min-w-max"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <thead>
+            <tr className="text-gray-500 text-base">
+              <th
+                rowSpan={2}
+                className="border border-border sticky left-0 z-10 bg-background"
+              >
                 Token
-              </span>
-            </th>
-            <th
-              className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("token_burnt")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["token_burnt"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
-                Token burnt
-              </span>
-            </th>
-            <th
-              className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("percentage")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["percentage"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
-                Percentage
-              </span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {loading ? (
-            Array(20)
-              .fill(null)
-              .map((_, index) => (
-                <tr key={index} className={clsx("border-b-1 border-b-border")}>
-                  <td className="py-4">
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                </tr>
-              ))
-          ) : sortedData.length != 0 ? (
-            sortedData?.map((v: Token, index) => {
-              return (
-                <motion.tr
-                  key={v.token_id}
-                  className={clsx(
-                    index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
-                    "hover:bg-hoverColor border-b-1 border-b-border"
-                  )}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <td>{v.token}</td>
-                  <td>{Number(v.sol_amount).toLocaleString()}</td>
-                  <td>{Number(v.token_amount).toLocaleString()}</td>
-                  <td>{Number(v.token_burnt).toLocaleString()}</td>
-                  <td>{Number(v.percentage).toLocaleString()}</td>
-                  <td
-                    className="cursor-pointer hover:underline"
-                    onClick={() => {
-                      window.open(
-                        `https://explorer.solana.com/tx/${v.transactions}?cluster=devnet`
-                      );
-                    }}
-                  >
-                    {truncAddress(v.transactions)}
-                  </td>
-                  <td className="flex justify-center items-center">
-                    <button className="flex flex-row gap-1 items-center bg-greyColor py-1 px-4 rounded-md">
-                      <FaBoltLightning fill="#f0c048" /> {buyToken}
-                    </button>
-                  </td>
-                </motion.tr>
-              );
-            })
-          ) : (
-            <tr className="border-b-1 border-b-border bg-evenColor">
-              <td colSpan={8} className="min-h-screen">
-                No data
-              </td>
+              </th>
+              <th colSpan={2} className="border border-border">
+                Inside Firebird Protocol
+              </th>
+              <th colSpan={2} className="border border-border">
+                Burnt
+              </th>
+              <th rowSpan={2} className="border border-border">
+                Transactions
+              </th>
+              <th
+                rowSpan={2}
+                className="border border-border sticky right-0 z-10 bg-background"
+              >
+                Quick buy
+              </th>
             </tr>
-          )}
-        </tbody>
-      </motion.table>
+            <tr className="text-gray-500 text-base">
+              <th
+                className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
+                onClick={() => handleSort("sol_amount")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["sol_amount"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  SOL
+                </span>
+              </th>
+              <th
+                className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
+                onClick={() => handleSort("token_amount")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["sol_amount"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  Token
+                </span>
+              </th>
+              <th
+                className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
+                onClick={() => handleSort("token_burnt")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["token_burnt"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  Token burnt
+                </span>
+              </th>
+              <th
+                className="border border-border cursor-pointer hover:text-primary py-5 group select-none"
+                onClick={() => handleSort("percentage")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["percentage"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  Percentage
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              Array(20)
+                .fill(null)
+                .map((_, index) => (
+                  <tr
+                    key={index}
+                    className={clsx("border-b-1 border-b-border")}
+                  >
+                    <td className="py-4">
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                  </tr>
+                ))
+            ) : sortedData.length != 0 ? (
+              sortedData?.map((v: Token, index) => {
+                return (
+                  <motion.tr
+                    key={v.token_id}
+                    className={clsx(
+                      index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
+                      "hover:bg-hoverColor border-b-1 border-b-border"
+                    )}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <td
+                      className={clsx(
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
+                        "hover:bg-hoverColor border-b-1 border-b-border sticky left-0 z-10"
+                      )}
+                    >
+                      {v.token}
+                    </td>
+                    <td>{Number(v.sol_amount).toLocaleString()}</td>
+                    <td>{Number(v.token_amount).toLocaleString()}</td>
+                    <td>{Number(v.token_burnt).toLocaleString()}</td>
+                    <td>{Number(v.percentage).toLocaleString()}</td>
+                    <td
+                      className="cursor-pointer hover:underline"
+                      onClick={() => {
+                        window.open(
+                          `https://explorer.solana.com/tx/${v.transactions}?cluster=devnet`
+                        );
+                      }}
+                    >
+                      {truncAddress(v.transactions)}
+                    </td>
+                    <td
+                      className={clsx(
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
+                        "hover:bg-hoverColor border-b-1 border-b-border sticky right-0 z-10"
+                      )}
+                    >
+                      <button className="flex flex-row gap-1 items-center bg-greyColor py-1 px-4 rounded-md">
+                        <FaBoltLightning fill="#f0c048" /> {buyToken}
+                      </button>
+                    </td>
+                  </motion.tr>
+                );
+              })
+            ) : (
+              <tr className="border-b-1 border-b-border bg-evenColor">
+                <td colSpan={8} className="min-h-screen">
+                  No data
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </motion.table>
+      </div>
       {isModalOpen && (
         <TokenModal
           onClose={closeModal}

@@ -402,7 +402,7 @@ const PublicSells = () => {
   };
   return (
     <div className="py-8">
-      <div className="flex justify-end flex-row gap-3 pr-8">
+      <div className="flex justify-end flex-row gap-3 pr-8 md:pr-2">
         <div className="relative">
           <button
             className="flex flex-row text-base items-center hover:text-primary text-gray-500 px-3 py-1 border border-gray-500 hover:border-primary rounded-md"
@@ -429,238 +429,255 @@ const PublicSells = () => {
           ></input>
         </div>
       </div>
-      <motion.table
-        className="table text-center border-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <thead>
-          <tr className="text-gray-500 border-b-1 border-b-border text-base">
-            <th
-              className="cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("id")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["id"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
-                ID
-              </span>
-            </th>
-            <th
-              className="cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("sell_at")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["sell_at"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
-                Sold at
-              </span>
-            </th>
-            <th
-              className="cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("token_amount")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["token_amount"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
-                Token Amount
-              </span>
-            </th>
-            <th
-              className="cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("sol_amount")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["sol_amount"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
-                Sol Amount
-              </span>
-            </th>
-            <th
-              className="cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("token_address")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["token_address"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
-                Token Address
-              </span>
-            </th>
-            <th
-              className="cursor-pointer hover:text-primary py-5 group select-none"
-              onClick={() => handleSort("price")}
-            >
-              <span className="flex flex-row items-center gap-1 justify-center">
-                {sortDirection["price"] === "asc" ? (
-                  <FaArrowUp
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                ) : (
-                  <FaArrowDown
-                    size={14}
-                    className="group-hover:opacity-100 opacity-0"
-                  />
-                )}
-                Price (SOL)
-              </span>
-            </th>
-            <th className="select-none">TX</th>
-            <th className="select-none">Buyback</th>
-          </tr>
-        </thead>
-        <tbody>
-          {loading ? (
-            Array(20)
-              .fill(null)
-              .map((_, index) => (
-                <tr key={index} className={clsx("border-b-1 border-b-border")}>
-                  <td className="py-4">
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                  <td>
-                    <Skeleton height={16} />
-                  </td>
-                </tr>
-              ))
-          ) : sortedData.length != 0 ? (
-            sortedData?.map((v: TestSell, index) => {
-              return (
-                <motion.tr
-                  key={v.id}
-                  className={clsx(
-                    index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
-                    "hover:bg-hoverColor border-b-1 border-b-border"
+      <div className="relative overflow-x-auto max-w-full">
+        <motion.table
+          className="table text-center border-0 w-full border-collapse min-w-max"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <thead>
+            <tr className="text-gray-500 border-b-1 border-b-border text-base">
+              <th
+                className="cursor-pointer hover:text-primary py-5 group select-none sticky left-0 z-10 bg-background"
+                onClick={() => handleSort("id")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["id"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
                   )}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <th className="text-gray-500 py-4 select-none relative">
-                    {v.id}
-                  </th>
-                  <td>
-                    {moment
-                      .utc(v.sell_at)
-                      .local()
-                      .format("YYYY-MM-DD HH:mm:ss")}
-                  </td>
-                  <td>{formatCurrency(v.token_amount, 9)}</td>
-                  <td>{formatCurrency(v.sol_amount, 9)}</td>
-                  <td
-                    className="cursor-pointer"
-                    onClick={() => {
-                      navigator.clipboard
-                        .writeText(v.token_address)
-                        .then(() => {
-                          toast.success("Copied.");
-                        })
-                        .catch((err) => {
-                          console.error("Failed to copy: ", err);
-                        });
-                    }}
-                  >
-                    {truncAddress(v.token_address)}
-                  </td>
-                  <td>{parseFloat(v.price).toFixed(10)}</td>
-                  <td
-                    className="cursor-pointer underline"
-                    onClick={() => {
-                      window.open(
-                        `https://explorer.solana.com/tx/${v.tx_id}?cluster=devnet`
-                      );
-                    }}
-                  >
-                    {truncAddress(v.tx_id)}
-                  </td>
-                  <td
-                    className="cursor-pointer underline"
-                    onClick={() => {
-                      if (v.buyback_tx)
-                        window.open(
-                          `https://explorer.solana.com/tx/${v.buyback_tx}?cluster=devnet`
-                        );
-                    }}
-                  >
-                    {truncAddress(v.buyback_tx || "")}
-                  </td>
-                </motion.tr>
-              );
-            })
-          ) : (
-            <tr className="border-b-1 border-b-border bg-evenColor">
-              <td colSpan={8} className="min-h-screen">
-                No data
-              </td>
+                  ID
+                </span>
+              </th>
+              <th
+                className="cursor-pointer hover:text-primary py-5 group select-none"
+                onClick={() => handleSort("sell_at")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["sell_at"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  Sold at
+                </span>
+              </th>
+              <th
+                className="cursor-pointer hover:text-primary py-5 group select-none"
+                onClick={() => handleSort("token_amount")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["token_amount"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  Token Amount
+                </span>
+              </th>
+              <th
+                className="cursor-pointer hover:text-primary py-5 group select-none"
+                onClick={() => handleSort("sol_amount")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["sol_amount"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  Sol Amount
+                </span>
+              </th>
+              <th
+                className="cursor-pointer hover:text-primary py-5 group select-none"
+                onClick={() => handleSort("token_address")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["token_address"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  Token Address
+                </span>
+              </th>
+              <th
+                className="cursor-pointer hover:text-primary py-5 group select-none"
+                onClick={() => handleSort("price")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["price"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  Price (SOL)
+                </span>
+              </th>
+              <th className="select-none">TX</th>
+              <th className="select-none sticky right-0 z-10 bg-background">
+                Buyback
+              </th>
             </tr>
-          )}
-        </tbody>
-      </motion.table>
+          </thead>
+          <tbody>
+            {loading ? (
+              Array(20)
+                .fill(null)
+                .map((_, index) => (
+                  <tr
+                    key={index}
+                    className={clsx(
+                      "border-b-1 border-b-border  bg-background"
+                    )}
+                  >
+                    <td className="py-4">
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                    <td>
+                      <Skeleton height={16} />
+                    </td>
+                  </tr>
+                ))
+            ) : sortedData.length != 0 ? (
+              sortedData?.map((v: TestSell, index) => {
+                return (
+                  <motion.tr
+                    key={v.id}
+                    className={clsx(
+                      index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
+                      "hover:bg-hoverColor border-b-1 border-b-border"
+                    )}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <th
+                      className={clsx(
+                        "text-gray-500 py-4 select-none  sticky left-0",
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
+                      )}
+                    >
+                      {v.id}
+                    </th>
+                    <td>
+                      {moment
+                        .utc(v.sell_at)
+                        .local()
+                        .format("YYYY-MM-DD HH:mm:ss")}
+                    </td>
+                    <td>{formatCurrency(v.token_amount, 9)}</td>
+                    <td>{formatCurrency(v.sol_amount, 9)}</td>
+                    <td
+                      className="cursor-pointer"
+                      onClick={() => {
+                        navigator.clipboard
+                          .writeText(v.token_address)
+                          .then(() => {
+                            toast.success("Copied.");
+                          })
+                          .catch((err) => {
+                            console.error("Failed to copy: ", err);
+                          });
+                      }}
+                    >
+                      {truncAddress(v.token_address)}
+                    </td>
+                    <td>{parseFloat(v.price).toFixed(10)}</td>
+                    <td
+                      className="cursor-pointer underline"
+                      onClick={() => {
+                        window.open(
+                          `https://explorer.solana.com/tx/${v.tx_id}?cluster=devnet`
+                        );
+                      }}
+                    >
+                      {truncAddress(v.tx_id)}
+                    </td>
+                    <td
+                      className={clsx(
+                        "text-gray-500 py-4 select-none underline sticky right-0",
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
+                      )}
+                      onClick={() => {
+                        if (v.buyback_tx)
+                          window.open(
+                            `https://explorer.solana.com/tx/${v.buyback_tx}?cluster=devnet`
+                          );
+                      }}
+                    >
+                      {truncAddress(v.buyback_tx || "")}
+                    </td>
+                  </motion.tr>
+                );
+              })
+            ) : (
+              <tr className="border-b-1 border-b-border bg-evenColor">
+                <td colSpan={8} className="min-h-screen">
+                  No data
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </motion.table>
+      </div>
       {isModalOpen && (
         <HomeModal
           onClose={closeModal}
