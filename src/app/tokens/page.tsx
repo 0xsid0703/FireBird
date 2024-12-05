@@ -358,11 +358,11 @@ const TokenPage = () => {
         <div className="flex md:justify-end md:flex-row flex-col md:gap-3 gap-1 md:w-fit w-full">
           <div className="relative">
             <button
-              className="flex flex-row text-base items-center hover:text-primary text-gray-500 px-3 py-1 border border-gray-500 hover:border-primary rounded-md w-full md:w-fit"
+              className="flex flex-row text-base items-center hover:text-primary text-gray-500 px-3 py-1 border border-gray-500 hover:border-primary rounded-md w-full md:w-fit justify-center"
               onClick={openModal}
             >
               <BiFilter />
-              filters
+              Filters
             </button>
             {filterNumber != 0 && (
               <div className="absolute rounded-full bg text-sm text-center top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-badgeColor w-5 h-5 text-black">
@@ -382,12 +382,12 @@ const TokenPage = () => {
             ></input>
           </div>
           <div className="flex flex-row items-center border border-gray-500 rounded-md text-gray-500 w-full md:w-40">
-            <div className="bg-greyColor w-2/5 text-white flex flex-row gap-1 items-center justify-center h-full rounded-l-md border border-greyColor select-none">
+            <div className="bg-greyColor w-2/5 text-white flex flex-row gap-1 items-center justify-center h-full rounded-l-md border border-greyColor select-none py-1">
               <FaBoltLightning fill="#f0c048" />
               BUY
             </div>
             <input
-              className="w-3/5 outline-none bg-transparent text-base px-2"
+              className="w-3/5 outline-none bg-transparent text-base px-2 py-1"
               name="buy"
               value={buyToken.toString()}
               onChange={(e) => setBuyToken(Number(e.target.value))}

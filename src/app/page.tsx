@@ -409,7 +409,7 @@ const PublicSells = () => {
             onClick={openModal}
           >
             <BiFilter />
-            filters
+            Filters
           </button>
           {filterNumber != 0 && (
             <div className="absolute rounded-full bg text-sm text-center top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-badgeColor w-5 h-5 text-black">

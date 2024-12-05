@@ -92,7 +92,7 @@ const HomeModal = ({ onClose, onSubmit, filters }: HomeModalProps) => {
   };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-background rounded-lg p-6 w-1/3 shadow-lg border border-border">
+      <div className="bg-background rounded-lg p-6 md:w-1/3 w-full mx-5 shadow-lg border border-border">
         <h2 className="text-lg font-semibold mb-4 select-none">Filter Modal</h2>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">

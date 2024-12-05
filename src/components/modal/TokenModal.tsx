@@ -81,7 +81,7 @@ const TokenModal = ({ onClose, onSubmit, filters }: TokenModalProps) => {
   };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-background rounded-lg p-6 w-1/3 shadow-lg border border-border">
+      <div className="bg-background rounded-lg p-6 md:w-1/3 w-full mx-5 shadow-lg border border-border">
         <h2 className="text-lg font-semibold mb-4 select-none">
           Token Filter Modal
         </h2>
