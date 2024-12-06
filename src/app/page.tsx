@@ -611,8 +611,7 @@ const PublicSells = () => {
                   >
                     <th
                       className={clsx(
-                        "text-gray-500 py-4 select-none  sticky left-0",
-                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
+                        "text-gray-500 py-4 select-none  sticky left-0"
                       )}
                     >
                       {v.id}
@@ -653,8 +652,7 @@ const PublicSells = () => {
                     </td>
                     <td
                       className={clsx(
-                        "text-gray-500 py-4 select-none underline sticky right-0",
-                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
+                        "text-gray-500 py-4 select-none underline sticky right-0"
                       )}
                       onClick={() => {
                         if (v.buyback_tx)

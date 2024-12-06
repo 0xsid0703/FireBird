@@ -222,6 +222,21 @@ const BuildersPage = () => {
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto mt-10 flex flex-col gap-5">
+        <div className="border border-border rounded-md h-48 flex items-center justify-center">
+          <div className="flex flex-col gap-3 justify-center">
+            <a href="/" className="text-xl hover:text-blue-500 underline">
+              Apply to join us
+            </a>
+            <ul className="list-decimal pl-5">
+              <li className="">
+                You have a token and apply to practice Firebird.
+              </li>
+              <li className="">
+                Create a new token on Pump.fun and practice Firebird.
+              </li>
+            </ul>
+          </div>
+        </div>
         <div className="flex flex-col gap-2">
           <div className="text-xl">The tokens with Firebird</div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">

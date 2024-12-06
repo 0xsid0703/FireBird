@@ -352,7 +352,17 @@ const TokenPage = () => {
     setLoading(true);
   };
   return (
-    <div className="py-8">
+    <div className="py-8 flex flex-col  gap-2">
+      <div className="border border-border rounded-md h-48 mx-3 flex items-center justify-center">
+        <div className="flex flex-col gap-3 justify-center">
+          <a href="/" className="text-xl hover:text-blue-500 underline">
+            About Firebird Protocol
+          </a>
+          <a href="/" className="text-xl hover:text-blue-500 underline">
+            Apply to use
+          </a>
+        </div>
+      </div>
       <div className="mx-5 flex flex-col md:flex-row items-center md:justify-between">
         <div className="text-xl font-semibold">Tokens Practicing Firebird</div>
         <div className="flex md:justify-end md:flex-row flex-col md:gap-3 gap-1 md:w-fit w-full">
@@ -398,7 +408,7 @@ const TokenPage = () => {
       </div>
       <div className="relative overflow-x-auto max-w-full">
         <motion.table
-          className="table text-center border-0 mt-2 w-full border-collapse min-w-max"
+          className="table text-center border-0 w-full border-collapse min-w-max"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -554,8 +564,7 @@ const TokenPage = () => {
                   >
                     <td
                       className={clsx(
-                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
-                        "hover:bg-hoverColor border-b-1 border-b-border sticky left-0 z-10"
+                        "border-b-1 border-b-border sticky left-0 z-10"
                       )}
                     >
                       {v.token}
@@ -576,8 +585,7 @@ const TokenPage = () => {
                     </td>
                     <td
                       className={clsx(
-                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
-                        "hover:bg-hoverColor border-b-1 border-b-border sticky right-0 z-10 flex justify-center"
+                        "border-b-1 border-b-border sticky right-0 z-10 flex justify-center"
                       )}
                     >
                       <button className="flex flex-row gap-1 items-center bg-greyColor py-1 px-4 rounded-md">
