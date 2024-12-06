@@ -10,7 +10,7 @@ import { BiFilter, BiSearch } from "react-icons/bi";
 import { truncAddress } from "@/utils/address";
 import TokenModal from "@/components/modal/TokenModal";
 import { parse, isValid } from "date-fns";
-
+import { useRouter } from "next/navigation";
 type TokenFilterProps = {
   sol_amount: [string, string];
   token_amount: [string, string];
@@ -18,6 +18,7 @@ type TokenFilterProps = {
   percentage: [string, string];
 };
 const TokenPage = () => {
+  const router = useRouter();
   const test_tokens: Token[] = [
     {
       token_id: "dG9rZW4tMQ==", // token-1
@@ -303,7 +304,6 @@ const TokenPage = () => {
     });
   };
   const sortData = (data: Token[], column: keyof Token) => {
-    console.log({ data }, { column });
     const sorted = data.sort((a: Token, b: Token) => {
       if (a[column] < b[column])
         return sortDirection[sortKey] === "asc" ? -1 : 1;
@@ -350,6 +350,9 @@ const TokenPage = () => {
     setSortDirection({ [column]: newDirection });
     setSortKey(column);
     setLoading(true);
+  };
+  const handleClickToken = (id: string) => {
+    router.push(`/tokens/${id}`);
   };
   return (
     <div className="py-8 flex flex-col  gap-2">
@@ -555,12 +558,13 @@ const TokenPage = () => {
                     key={v.token_id}
                     className={clsx(
                       index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
-                      "hover:bg-hoverColor border-b-1 border-b-border"
+                      "hover:bg-hoverColor border-b-1 border-b-border cursor-pointer"
                     )}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
+                    onClick={() => handleClickToken(v.token_id)}
                   >
                     <td
                       className={clsx(

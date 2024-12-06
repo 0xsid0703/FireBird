@@ -11,7 +11,6 @@ import useDarkMode from "@/hooks/useDarkMode";
 export function Navbar() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   useEffect(() => {
-    console.log("hello");
     window.addEventListener("storage", () => {
       setIsDarkMode(window.localStorage.getItem("darkMode") === "true");
     });
@@ -19,9 +18,6 @@ export function Navbar() {
     return () => window.removeEventListener("storage", () => {});
   }, []);
 
-  useEffect(() => {
-    console.log({ isDarkMode });
-  }, [isDarkMode]);
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -129,11 +125,12 @@ export function Navbar() {
                 Blog
               </Link>
               <Link
-                href="https://docs.google.com/document/d/1owxvcFANaq9Yn1otAdty8RpVyYy-1zqwUT-6xReUl5k/edit?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/team"
                 className={clsx(
-                  "hover:text-gray-500 px-3 leading-none select-none"
+                  "hover:text-gray-500 px-3 leading-none select-none",
+                  {
+                    "text-yellow-600": pathName === "/team",
+                  }
                 )}
               >
                 Team

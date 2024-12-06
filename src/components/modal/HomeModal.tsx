@@ -80,7 +80,6 @@ const HomeModal = ({ onClose, onSubmit, filters }: HomeModalProps) => {
       price: price,
     };
     onSubmit(filter);
-    console.log("Clicked: submit");
   };
 
   const handleReset = () => {

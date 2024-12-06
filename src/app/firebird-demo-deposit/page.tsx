@@ -1,7 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
 import InputField from "@/components/ui/InputField";
 import { Select } from "@/components/ui/Select";
 import { POOLS } from "@/constants/pools";
@@ -25,8 +32,10 @@ const Home = () => {
   const isFormValid = useMemo(() => {
     if (!tokenName || tokenName === "") return false;
     if (!decimals || decimals === "" || decimals === "0") return false;
-    if (!depositNumber || depositNumber === "" || depositNumber === "0") return false;
-    if (!depositDuration || depositDuration === "" || depositDuration === "0") return false;
+    if (!depositNumber || depositNumber === "" || depositNumber === "0")
+      return false;
+    if (!depositDuration || depositDuration === "" || depositDuration === "0")
+      return false;
     if (!tokenAddress || tokenAddress === "") return false;
     return true;
   }, [tokenName, decimals, depositNumber, depositDuration, tokenAddress]);
@@ -59,25 +68,32 @@ const Home = () => {
 
     setIsDepositing(true);
     try {
-      const amount = parseInt(depositNumber, 10) * Math.pow(10, parseInt(decimals, 10));
-      const tx_signature = await sendTransaction.deposit(userPublicKey.toString(), tokenAddress, amount)
+      const amount =
+        parseInt(depositNumber, 10) * Math.pow(10, parseInt(decimals, 10));
+      const tx_signature = await sendTransaction.deposit(
+        userPublicKey.toString(),
+        tokenAddress,
+        amount
+      );
       if (!tx_signature) {
-        throw Error("Depost tx failed")
+        throw Error("Depost tx failed");
       }
       await handleCreateTreasury();
     } catch (err) {
-      console.error(err)
+      console.error(err);
     } finally {
       setIsDepositing(false);
     }
-  }, [isFormValid, handleCreateTreasury])
+  }, [isFormValid, handleCreateTreasury]);
 
   return (
     <div className="container mx-auto p-4">
       <Card className="w-full max-w-md mx-auto">
         <CardHeader>
           <CardTitle>Deposit Tokens</CardTitle>
-          <CardDescription>Enter your token details to make a deposit</CardDescription>
+          <CardDescription>
+            Enter your token details to make a deposit
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <InputField
@@ -146,7 +162,13 @@ const Home = () => {
           />
         </CardContent>
         <CardFooter>
-          <Button onClick={() => handleDeposit()} variant="default" disabled={!userPublicKey} loading={isDepositing} fullWidth>
+          <Button
+            onClick={() => handleDeposit()}
+            variant="default"
+            disabled={!userPublicKey}
+            loading={isDepositing}
+            fullWidth
+          >
             Deposit
           </Button>
         </CardFooter>
