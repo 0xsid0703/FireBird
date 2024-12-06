@@ -6,13 +6,12 @@ import { useEffect, useRef, useState } from "react";
 import { ThemeToggleButton, WalletConnectButton } from "../buttons";
 import clsx from "clsx";
 import Image from "next/image";
-import useDarkMode from "@/hooks/useDarkMode";
 
 export function Navbar() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isLightMode, setIsLightMode] = useState<boolean>(true);
   useEffect(() => {
     window.addEventListener("storage", () => {
-      setIsDarkMode(window.localStorage.getItem("darkMode") === "true");
+      setIsLightMode(window.localStorage.getItem("lightMode") === "true");
     });
 
     return () => window.removeEventListener("storage", () => {});
@@ -55,7 +54,7 @@ export function Navbar() {
                 router.push("/");
               }}
             >
-              {!isDarkMode ? (
+              {isLightMode ? (
                 <Image
                   src={"/logo-light.png"}
                   width={64}

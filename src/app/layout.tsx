@@ -1,5 +1,5 @@
 import { WalletContextProvider } from "@/contexts/WalletContextProvider";
-import DarkModeProvider from "@/lib/dark-mode-provider";
+import DarkModeProvider from "@/lib/light-mode-provider";
 import { ReactQueryProvider } from "@/lib/react-query-provider";
 import "@/styles/globals.scss";
 import type { Metadata } from "next";
