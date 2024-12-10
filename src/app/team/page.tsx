@@ -51,7 +51,7 @@ const TeamPage = () => {
       {/* <div className="max-w-7xl mx-auto mt-10 lg:gap-5 md:gap-3 gap-1 lg:grid-cols-4 md:grid-cols-2 grid grid-cols-1 "> */}
       <div className="max-w-7xl mx-auto mt-10 flex flex-col gap-3 items-center">
         <div className="text-4xl">Meet the team</div>
-        <div className="lg:gap-5 md:gap-3 gap-1 flex md:flex-row flex-col">
+        <div className="lg:gap-5 gap-3 flex md:flex-row flex-col">
           {members.map((member: Member, index: number) => (
             <MemberCard key={index} {...member} />
           ))}
