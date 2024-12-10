@@ -25,6 +25,8 @@ const config: Config = {
         },
       },
       colors: {
+        highColor: "#23c24d",
+        lowColor: "#c23023",
         greyColor: "var(--grey-color)",
         badgeColor: "hsl(var(--badge-color))",
         hoverColor: "hsl(var(--hover-color))",

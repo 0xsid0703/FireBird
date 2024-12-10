@@ -26,7 +26,7 @@ const TokenPage = () => {
       sol_amount: "3500",
       token_amount: "150000",
       token_burnt: "5000",
-      percentage: "3.33",
+      percentage: "85.2",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -36,7 +36,7 @@ const TokenPage = () => {
       sol_amount: "7000",
       token_amount: "450000",
       token_burnt: "8000",
-      percentage: "1.78",
+      percentage: "65",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -46,7 +46,7 @@ const TokenPage = () => {
       sol_amount: "5000",
       token_amount: "300000",
       token_burnt: "6000",
-      percentage: "2.00",
+      percentage: "28",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -56,7 +56,7 @@ const TokenPage = () => {
       sol_amount: "9000",
       token_amount: "800000",
       token_burnt: "7000",
-      percentage: "0.88",
+      percentage: "98.5",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -66,7 +66,7 @@ const TokenPage = () => {
       sol_amount: "6500",
       token_amount: "600000",
       token_burnt: "9000",
-      percentage: "1.50",
+      percentage: "15.50",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -86,7 +86,7 @@ const TokenPage = () => {
       sol_amount: "8000",
       token_amount: "950000",
       token_burnt: "10000",
-      percentage: "1.05",
+      percentage: "74.5",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -96,7 +96,7 @@ const TokenPage = () => {
       sol_amount: "4500",
       token_amount: "500000",
       token_burnt: "4000",
-      percentage: "0.80",
+      percentage: "66.5",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -106,7 +106,7 @@ const TokenPage = () => {
       sol_amount: "2000",
       token_amount: "100000",
       token_burnt: "3000",
-      percentage: "3.00",
+      percentage: "54.2",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -116,7 +116,7 @@ const TokenPage = () => {
       sol_amount: "10000",
       token_amount: "700000",
       token_burnt: "6000",
-      percentage: "0.86",
+      percentage: "86",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -126,7 +126,7 @@ const TokenPage = () => {
       sol_amount: "7200",
       token_amount: "870000",
       token_burnt: "5000",
-      percentage: "0.57",
+      percentage: "57",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -136,7 +136,7 @@ const TokenPage = () => {
       sol_amount: "4900",
       token_amount: "330000",
       token_burnt: "7000",
-      percentage: "2.12",
+      percentage: "21.2",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -146,7 +146,7 @@ const TokenPage = () => {
       sol_amount: "3600",
       token_amount: "270000",
       token_burnt: "3000",
-      percentage: "1.11",
+      percentage: "58.5",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -156,7 +156,7 @@ const TokenPage = () => {
       sol_amount: "6700",
       token_amount: "920000",
       token_burnt: "8000",
-      percentage: "0.87",
+      percentage: "87.6",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -166,7 +166,7 @@ const TokenPage = () => {
       sol_amount: "8200",
       token_amount: "750000",
       token_burnt: "6000",
-      percentage: "0.80",
+      percentage: "94.3",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -176,7 +176,7 @@ const TokenPage = () => {
       sol_amount: "4000",
       token_amount: "200000",
       token_burnt: "2000",
-      percentage: "1.00",
+      percentage: "5.8",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -186,7 +186,7 @@ const TokenPage = () => {
       sol_amount: "6000",
       token_amount: "650000",
       token_burnt: "7000",
-      percentage: "1.08",
+      percentage: "46.5",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -196,7 +196,7 @@ const TokenPage = () => {
       sol_amount: "7100",
       token_amount: "850000",
       token_burnt: "5000",
-      percentage: "0.71",
+      percentage: "35.2",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -206,7 +206,7 @@ const TokenPage = () => {
       sol_amount: "9100",
       token_amount: "980000",
       token_burnt: "8000",
-      percentage: "0.82",
+      percentage: "82.5",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -216,7 +216,7 @@ const TokenPage = () => {
       sol_amount: "2400",
       token_amount: "150000",
       token_burnt: "4000",
-      percentage: "2.67",
+      percentage: "83.6",
       transactions:
         "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
     },
@@ -568,7 +568,8 @@ const TokenPage = () => {
                   >
                     <td
                       className={clsx(
-                        "border-b-1 border-b-border sticky left-0 z-10"
+                        "border-b-1 border-b-border sticky left-0 z-10",
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
                       )}
                     >
                       {v.token}
@@ -576,7 +577,15 @@ const TokenPage = () => {
                     <td>{Number(v.sol_amount).toLocaleString()}</td>
                     <td>{Number(v.token_amount).toLocaleString()}</td>
                     <td>{Number(v.token_burnt).toLocaleString()}</td>
-                    <td>{Number(v.percentage).toLocaleString()}</td>
+                    <td
+                      className={clsx(
+                        Number(v.percentage) > 60
+                          ? "text-highColor"
+                          : "text-lowColor"
+                      )}
+                    >
+                      {Number(v.percentage).toLocaleString()}
+                    </td>
                     <td
                       className="cursor-pointer hover:underline"
                       onClick={() => {
@@ -589,7 +598,8 @@ const TokenPage = () => {
                     </td>
                     <td
                       className={clsx(
-                        "border-b-1 border-b-border sticky right-0 z-10 flex justify-center"
+                        "border-b-1 border-b-border sticky right-0 z-10 flex justify-center",
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
                       )}
                     >
                       <button className="flex flex-row gap-1 items-center bg-greyColor py-1 px-4 rounded-md">

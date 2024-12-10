@@ -607,7 +607,8 @@ const TokenDetailsPage = () => {
                   >
                     <th
                       className={clsx(
-                        "text-gray-500 py-4 select-none  sticky left-0"
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
+                        "text-gray-500 py-4 select-none  sticky left-0 z-10"
                       )}
                     >
                       {v.id}
@@ -648,7 +649,8 @@ const TokenDetailsPage = () => {
                     </td>
                     <td
                       className={clsx(
-                        "cursor-pointer underline py-4 select-none sticky right-0"
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
+                        "cursor-pointer underline py-4 select-none sticky right-0  z-10"
                       )}
                       onClick={() => {
                         if (v.buyback_tx)
