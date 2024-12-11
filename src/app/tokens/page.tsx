@@ -11,6 +11,11 @@ import { truncAddress } from "@/utils/address";
 import TokenModal from "@/components/modal/TokenModal";
 import { parse, isValid } from "date-fns";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { getSellsPublic } from "@/services/treasury";
+import { Sell } from "@/types/sell";
+import moment from "moment";
+import { toast } from "react-toastify";
 type TokenFilterProps = {
   sol_amount: [string, string];
   token_amount: [string, string];
@@ -19,292 +24,100 @@ type TokenFilterProps = {
 };
 const TokenPage = () => {
   const router = useRouter();
-  const test_tokens: Token[] = [
-    {
-      token_id: "dG9rZW4tMQ==", // token-1
-      token: "TokenA",
-      sol_amount: "3500",
-      token_amount: "150000",
-      token_burnt: "5000",
-      percentage: "85.2",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMg==", // token-2
-      token: "TokenB",
-      sol_amount: "7000",
-      token_amount: "450000",
-      token_burnt: "8000",
-      percentage: "65",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMw==", // token-3
-      token: "TokenC",
-      sol_amount: "5000",
-      token_amount: "300000",
-      token_burnt: "6000",
-      percentage: "28",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tNA==", // token-4
-      token: "TokenD",
-      sol_amount: "9000",
-      token_amount: "800000",
-      token_burnt: "7000",
-      percentage: "98.5",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tNQ==", // token-5
-      token: "TokenE",
-      sol_amount: "6500",
-      token_amount: "600000",
-      token_burnt: "9000",
-      percentage: "15.50",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tNg==", // token-6
-      token: "TokenF",
-      sol_amount: "3000",
-      token_amount: "120000",
-      token_burnt: "2000",
-      percentage: "1.67",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tNw==", // token-7
-      token: "TokenG",
-      sol_amount: "8000",
-      token_amount: "950000",
-      token_burnt: "10000",
-      percentage: "74.5",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tOA==", // token-8
-      token: "TokenH",
-      sol_amount: "4500",
-      token_amount: "500000",
-      token_burnt: "4000",
-      percentage: "66.5",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tOQ==", // token-9
-      token: "TokenI",
-      sol_amount: "2000",
-      token_amount: "100000",
-      token_burnt: "3000",
-      percentage: "54.2",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTA=", // token-10
-      token: "TokenJ",
-      sol_amount: "10000",
-      token_amount: "700000",
-      token_burnt: "6000",
-      percentage: "86",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTE=", // token-11
-      token: "TokenK",
-      sol_amount: "7200",
-      token_amount: "870000",
-      token_burnt: "5000",
-      percentage: "57",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTI=", // token-12
-      token: "TokenL",
-      sol_amount: "4900",
-      token_amount: "330000",
-      token_burnt: "7000",
-      percentage: "21.2",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTM=", // token-13
-      token: "TokenM",
-      sol_amount: "3600",
-      token_amount: "270000",
-      token_burnt: "3000",
-      percentage: "58.5",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTQ=", // token-14
-      token: "TokenN",
-      sol_amount: "6700",
-      token_amount: "920000",
-      token_burnt: "8000",
-      percentage: "87.6",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTU=", // token-15
-      token: "TokenO",
-      sol_amount: "8200",
-      token_amount: "750000",
-      token_burnt: "6000",
-      percentage: "94.3",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTY=", // token-16
-      token: "TokenP",
-      sol_amount: "4000",
-      token_amount: "200000",
-      token_burnt: "2000",
-      percentage: "5.8",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTc=", // token-17
-      token: "TokenQ",
-      sol_amount: "6000",
-      token_amount: "650000",
-      token_burnt: "7000",
-      percentage: "46.5",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTg=", // token-18
-      token: "TokenR",
-      sol_amount: "7100",
-      token_amount: "850000",
-      token_burnt: "5000",
-      percentage: "35.2",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMTk=", // token-19
-      token: "TokenS",
-      sol_amount: "9100",
-      token_amount: "980000",
-      token_burnt: "8000",
-      percentage: "82.5",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-    {
-      token_id: "dG9rZW4tMjA=", // token-20
-      token: "TokenT",
-      sol_amount: "2400",
-      token_amount: "150000",
-      token_burnt: "4000",
-      percentage: "83.6",
-      transactions:
-        "0xcd55cc4d42fe4736e59ce21a8d1c8a62fc2b7bf7d6dcc71f50636bd8e6a367a4",
-    },
-  ];
+  const {
+    data: sells,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["sells-public"],
+    queryFn: () => getSellsPublic(),
+  });
+
   const defaultFilters: TokenFilterProps = {
     sol_amount: ["", ""],
     token_amount: ["", ""],
     token_burnt: ["", ""],
     percentage: ["", ""],
   };
-
-  const [sortedData, setSortedData] = useState<Token[]>(test_tokens);
+  const [defaultData, setDefaultData] = useState<Sell[]>(sells);
+  const [sortedData, setSortedData] = useState<Sell[]>([]);
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState<TokenFilterProps>(defaultFilters);
-  const [buyToken, setBuyToken] = useState<number>(0.1);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [filterNumber, setFilterNumber] = useState(0);
   const [searchFilter, setSearchFilter] = useState("");
-  const [sortKey, setSortKey] = useState<keyof Token>("sol_amount");
+  const [sortKey, setSortKey] = useState<keyof Sell>("sol_amount");
   const [sortDirection, setSortDirection] = useState<{ [key: string]: string }>(
     {}
   );
   const openModal = (): void => setModalOpen(true); // Open modal
   const closeModal = (): void => setModalOpen(false); // Close modal
-  const filterData = (data: Token[], filter: TokenFilterProps): Token[] => {
-    return data.filter((item) => {
-      return Object.keys(filter).every((key: string) => {
-        const [min, max] = filter[key as keyof TokenFilterProps];
-        const value = item[key as keyof Token]; // Get value from the data item
+  const filterData = (data: Sell[], filter: TokenFilterProps): Sell[] => {
+    return data
+      ? data.filter((item) => {
+          return Object.keys(filter).every((key: string) => {
+            const [min, max] = filter[key as keyof TokenFilterProps];
+            const value = item[key as keyof Sell]; // Get value from the data item
 
-        // Check if the filter is for dates
-        if (key === "sell_at") {
-          // Replace "date_field_name" with your actual date field key
-          const minDate = min ? parse(min, "dd-MM-yyyy", new Date()) : null;
-          const maxDate = max ? parse(max, "dd-MM-yyyy", new Date()) : null;
+            // Check if the filter is for dates
+            if (key === "sell_at") {
+              // Replace "date_field_name" with your actual date field key
+              const minDate = min ? parse(min, "dd-MM-yyyy", new Date()) : null;
+              const maxDate = max ? parse(max, "dd-MM-yyyy", new Date()) : null;
 
-          // If both min and max dates are provided, filter by the date range
-          if (minDate && maxDate) {
-            const itemDate = new Date(value);
-            if (
-              isValid(itemDate) &&
-              (itemDate < minDate || itemDate > maxDate)
-            ) {
-              return false;
+              // If both min and max dates are provided, filter by the date range
+              if (minDate && maxDate) {
+                const itemDate = new Date(value);
+                if (
+                  isValid(itemDate) &&
+                  (itemDate < minDate || itemDate > maxDate)
+                ) {
+                  return false;
+                }
+              } else if (minDate) {
+                // Only min date is provided, filter for values greater than or equal to min
+                const itemDate = new Date(value);
+                if (isValid(itemDate) && itemDate < minDate) {
+                  return false;
+                }
+              } else if (maxDate) {
+                // Only max date is provided, filter for values less than or equal to max
+                const itemDate = new Date(value);
+                if (isValid(itemDate) && itemDate > maxDate) {
+                  return false;
+                }
+              }
+            } else {
+              // Handle non-date filters like number or string (your existing logic)
+              if (min && max) {
+                // Both min and max are provided, filter by the range
+                if (
+                  parseFloat(value) < parseFloat(min) ||
+                  parseFloat(value) > parseFloat(max)
+                ) {
+                  return false;
+                }
+              } else if (min) {
+                // Only min value is provided, filter for values greater than or equal to min
+                if (parseFloat(value) < parseFloat(min)) {
+                  return false;
+                }
+              } else if (max) {
+                // Only max value is provided, filter for values less than or equal to max
+                if (parseFloat(value) > parseFloat(max)) {
+                  return false;
+                }
+              }
             }
-          } else if (minDate) {
-            // Only min date is provided, filter for values greater than or equal to min
-            const itemDate = new Date(value);
-            if (isValid(itemDate) && itemDate < minDate) {
-              return false;
-            }
-          } else if (maxDate) {
-            // Only max date is provided, filter for values less than or equal to max
-            const itemDate = new Date(value);
-            if (isValid(itemDate) && itemDate > maxDate) {
-              return false;
-            }
-          }
-        } else {
-          // Handle non-date filters like number or string (your existing logic)
-          if (min && max) {
-            // Both min and max are provided, filter by the range
-            if (
-              parseFloat(value) < parseFloat(min) ||
-              parseFloat(value) > parseFloat(max)
-            ) {
-              return false;
-            }
-          } else if (min) {
-            // Only min value is provided, filter for values greater than or equal to min
-            if (parseFloat(value) < parseFloat(min)) {
-              return false;
-            }
-          } else if (max) {
-            // Only max value is provided, filter for values less than or equal to max
-            if (parseFloat(value) > parseFloat(max)) {
-              return false;
-            }
-          }
-        }
 
-        // If no min/max is provided, keep the item (for empty string filters)
-        return true;
-      });
-    });
+            // If no min/max is provided, keep the item (for empty string filters)
+            return true;
+          });
+        })
+      : [];
   };
-  const sortData = (data: Token[], column: keyof Token) => {
-    const sorted = data.sort((a: Token, b: Token) => {
+  const sortData = (data: Sell[], column: keyof Sell) => {
+    const sorted = data.sort((a: Sell, b: Sell) => {
       if (a[column] < b[column])
         return sortDirection[sortKey] === "asc" ? -1 : 1;
       if (a[column] > b[column])
@@ -318,20 +131,22 @@ const TokenPage = () => {
   ): number => {
     return Object.values(filters).filter(([min, max]) => min || max).length;
   };
-  const searchfilterData = (data: Token[], filter: string) => {
-    return data.filter((item) => {
-      return Object.keys(item).some((key) => {
-        const value = item[key as keyof Token];
-        return value
-          .toString()
-          .toLowerCase()
-          .includes(filter.toString().toLowerCase());
-      });
-    });
+  const searchfilterData = (data: Sell[], filter: string) => {
+    return data
+      ? data.filter((item) => {
+          return Object.keys(item).some((key) => {
+            const value = item[key as keyof Sell];
+            return value
+              .toString()
+              .toLowerCase()
+              .includes(filter.toString().toLowerCase());
+          });
+        })
+      : data;
   };
   useEffect(() => {
     setTimeout(() => {
-      const filteredData = filterData(test_tokens, filters);
+      const filteredData = filterData(defaultData, filters);
       const searchFilteredData = searchfilterData(filteredData, searchFilter);
       const sortedData = sortData(searchFilteredData, sortKey);
       const numberFilter = getNumberOfFilters(filters);
@@ -339,13 +154,13 @@ const TokenPage = () => {
       setSortedData(sortedData);
       setLoading(false);
     }, 1500);
-  }, [filters, sortDirection, searchFilter]);
+  }, [defaultData, filters, sortDirection, searchFilter]);
   const updateInputValues = (values: TokenFilterProps): void => {
     setFilters(values);
     setLoading(true);
     closeModal(); // Close modal after updating
   };
-  const handleSort = (column: keyof Token) => {
+  const handleSort = (column: keyof Sell) => {
     const newDirection = sortDirection[column] === "asc" ? "desc" : "asc";
     setSortDirection({ [column]: newDirection });
     setSortKey(column);
@@ -354,6 +169,11 @@ const TokenPage = () => {
   const handleClickToken = (id: string) => {
     router.push(`/tokens/${id}`);
   };
+  useEffect(() => {
+    setDefaultData(sells);
+    setSortedData(sells);
+    setLoading(isLoading);
+  }, [sells, isLoading]);
   return (
     <div className="py-8 flex flex-col  gap-2">
       <div className="border border-border rounded-md h-48 mx-3 flex items-center justify-center">
@@ -394,19 +214,6 @@ const TokenPage = () => {
               }}
             ></input>
           </div>
-          <div className="flex flex-row items-center border border-gray-500 rounded-md text-gray-500 w-full md:w-40">
-            <div className="bg-greyColor w-2/5 text-white flex flex-row gap-1 items-center justify-center h-full rounded-l-md border border-greyColor select-none py-1">
-              <FaBoltLightning fill="#f0c048" />
-              BUY
-            </div>
-            <input
-              className="w-3/5 outline-none bg-transparent text-base px-2 py-1"
-              name="buy"
-              value={buyToken.toString()}
-              onChange={(e) => setBuyToken(Number(e.target.value))}
-              type="number"
-            ></input>
-          </div>
         </div>
       </div>
       <div className="relative overflow-x-auto max-w-full">
@@ -424,6 +231,12 @@ const TokenPage = () => {
               >
                 Token
               </th>
+              <th
+                rowSpan={2}
+                className="border border-border sticky left-0 z-10 bg-background"
+              >
+                Token Address
+              </th>
               <th colSpan={2} className="border border-border">
                 Inside Firebird Protocol
               </th>
@@ -437,7 +250,7 @@ const TokenPage = () => {
                 rowSpan={2}
                 className="border border-border sticky right-0 z-10 bg-background"
               >
-                Quick buy
+                Sell At
               </th>
             </tr>
             <tr className="text-gray-500 text-base">
@@ -531,6 +344,9 @@ const TokenPage = () => {
                     <td className="py-4">
                       <Skeleton height={16} />
                     </td>
+                    <td className="py-4">
+                      <Skeleton height={16} />
+                    </td>
                     <td>
                       <Skeleton height={16} />
                     </td>
@@ -552,19 +368,19 @@ const TokenPage = () => {
                   </tr>
                 ))
             ) : sortedData.length != 0 ? (
-              sortedData?.map((v: Token, index) => {
+              sortedData?.map((v: Sell, index) => {
                 return (
                   <motion.tr
-                    key={v.token_id}
+                    key={v.id}
                     className={clsx(
                       index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
-                      "hover:bg-hoverColor border-b-1 border-b-border cursor-pointer"
+                      "border-b-1 border-b-border cursor-pointer"
                     )}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    onClick={() => handleClickToken(v.token_id)}
+                    // onClick={() => handleClickToken(v.id)}
                   >
                     <td
                       className={clsx(
@@ -572,29 +388,42 @@ const TokenPage = () => {
                         index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
                       )}
                     >
-                      {v.token}
+                      {"NASDOG"}
+                    </td>
+                    <td
+                      className="cursor-pointer"
+                      onClick={() => {
+                        navigator.clipboard
+                          .writeText(v.token_address)
+                          .then(() => {
+                            toast.success("Copied.");
+                          })
+                          .catch((err) => {
+                            console.error("Failed to copy: ", err);
+                          });
+                      }}
+                    >
+                      {truncAddress(v.token_address)}
                     </td>
                     <td>{Number(v.sol_amount).toLocaleString()}</td>
                     <td>{Number(v.token_amount).toLocaleString()}</td>
-                    <td>{Number(v.token_burnt).toLocaleString()}</td>
+                    <td>{Number(0).toLocaleString()}</td>
                     <td
                       className={clsx(
-                        Number(v.percentage) > 60
-                          ? "text-highColor"
-                          : "text-lowColor"
+                        Number(0) > 60 ? "text-highColor" : "text-lowColor"
                       )}
                     >
-                      {Number(v.percentage).toLocaleString()}
+                      {Number(0).toLocaleString()}
                     </td>
                     <td
                       className="cursor-pointer hover:underline"
                       onClick={() => {
                         window.open(
-                          `https://explorer.solana.com/tx/${v.transactions}?cluster=devnet`
+                          `https://explorer.solana.com/tx/${v.tx_id}?cluster=devnet`
                         );
                       }}
                     >
-                      {truncAddress(v.transactions)}
+                      {truncAddress(v.tx_id)}
                     </td>
                     <td
                       className={clsx(
@@ -602,9 +431,7 @@ const TokenPage = () => {
                         index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
                       )}
                     >
-                      <button className="flex flex-row gap-1 items-center bg-greyColor py-1 px-4 rounded-md">
-                        <FaBoltLightning fill="#f0c048" /> {buyToken}
-                      </button>
+                      {moment(v.sell_at, "YYYY-MM-DD").format("MMMM Do, YYYY")}
                     </td>
                   </motion.tr>
                 );

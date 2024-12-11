@@ -20,6 +20,7 @@ export const getTreasuries = async () => {
     const { data } = await apiClient.get(`/treasury/all`);
 
     if (data.error) {
+      console.log("Error: ", data.error);
       throw new Error(data.error);
     }
 

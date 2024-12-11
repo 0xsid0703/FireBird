@@ -5,6 +5,8 @@ export type CreateSellData = {
   sol_amount: string;
   price: string;
   tx_id: string;
+  token_burnt: string;
+  percentage: string;
 };
 
 export type Sell = CreateSellData & {

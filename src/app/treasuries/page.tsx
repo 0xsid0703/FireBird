@@ -15,11 +15,11 @@ const Treasuries = () => {
 
   const { connected } = useWallet();
 
-  useEffect(() => {
-    if (!connected) {
-      router.push("/");
-    }
-  }, [connected]);
+  // useEffect(() => {
+  // if (!connected) {
+  //   router.push("/");
+  // }
+  // }, [connected]);
 
   const {
     data: treasuries,
@@ -29,9 +29,12 @@ const Treasuries = () => {
     queryKey: ["treasuries"],
     queryFn: () => getTreasuries(),
   });
-
+  useEffect(() => {
+    console.log({ treasuries });
+  }, [treasuries]);
   if (isLoading) return <div className="p-8"> Loading ... </div>;
-  if (isError) return <div className="p-8"> Error fetching treasuries ... </div>;
+  if (isError)
+    return <div className="p-8"> Error fetching treasuries ... </div>;
 
   return (
     <div className="p-8 overflow-x-auto">
@@ -71,7 +74,12 @@ const Treasuries = () => {
                 </td>
                 <td>{v.deposit_count}</td>
                 <td>{v.duration}</td>
-                <td>{moment.utc(v.created_at).local().format("YYYY-MM-DD HH:mm:ss")}</td>
+                <td>
+                  {moment
+                    .utc(v.created_at)
+                    .local()
+                    .format("YYYY-MM-DD HH:mm:ss")}
+                </td>
                 <td>{v.completed}</td>
                 <td
                   className="cursor-pointer"

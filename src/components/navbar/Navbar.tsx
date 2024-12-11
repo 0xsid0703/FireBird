@@ -72,11 +72,11 @@ export function Navbar() {
                 />
               )}
             </span>
-            {connected && (
+            {/* {connected && (
               <Link href="/treasuries" className="underline">
                 Treasuries
               </Link>
-            )}
+            )} */}
           </div>
 
           <div className="flex items-center space-x-4">
@@ -136,7 +136,7 @@ export function Navbar() {
               </Link>
             </div>
             <ThemeToggleButton />
-            {/* {pathName !== "/" && <WalletConnectButton />} */}
+            {pathName !== "/" && <WalletConnectButton />}
           </div>
         </div>
       </div>
