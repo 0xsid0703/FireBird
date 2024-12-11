@@ -188,7 +188,7 @@ const TokenPage = () => {
         </div>
       </div>
       <div className="mx-5 flex flex-col md:flex-row items-center md:justify-between">
-        <div className="text-xl font-semibold">Tokens Practicing Firebird</div>
+        <div className="text-xl font-semibold">Tokens using Firebird</div>
         <div className="flex md:justify-end md:flex-row flex-col md:gap-3 gap-1 md:w-fit w-full">
           <div className="relative">
             <button
@@ -239,7 +239,7 @@ const TokenPage = () => {
                 Token Address
               </th>
               <th colSpan={3} className="border border-border">
-                Sell
+                Sold
               </th>
               <th colSpan={2} className="border border-border">
                 Burnt
@@ -250,10 +250,23 @@ const TokenPage = () => {
             </tr>
             <tr className="text-gray-500 text-base">
               <th
-                rowSpan={2}
-                className="border border-border sticky right-0 z-10 bg-background"
+                className="border border-border cursor-pointer hover:text-primary  group select-none"
+                onClick={() => handleSort("sell_at")}
               >
-                Sold At
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["sell_at"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  Sold On
+                </span>
               </th>
               <th
                 className="border border-border cursor-pointer hover:text-primary  group select-none"
@@ -271,7 +284,7 @@ const TokenPage = () => {
                       className="group-hover:opacity-100 opacity-0"
                     />
                   )}
-                  SOL
+                  SOL Received
                 </span>
               </th>
               <th
@@ -290,7 +303,7 @@ const TokenPage = () => {
                       className="group-hover:opacity-100 opacity-0"
                     />
                   )}
-                  Token
+                  Tokens Sold
                 </span>
               </th>
               <th
@@ -309,7 +322,7 @@ const TokenPage = () => {
                       className="group-hover:opacity-100 opacity-0"
                     />
                   )}
-                  Token burnt
+                  Tokens Burnt
                 </span>
               </th>
               <th
