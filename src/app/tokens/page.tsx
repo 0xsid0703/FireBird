@@ -40,9 +40,8 @@ const TokenPage = () => {
     token_burnt: ["", ""],
     percentage: ["", ""],
   };
-  const [defaultData, setDefaultData] = useState<Sell[]>(sells);
   const [sortedData, setSortedData] = useState<Sell[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(isLoading);
   const [filters, setFilters] = useState<TokenFilterProps>(defaultFilters);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [filterNumber, setFilterNumber] = useState(0);
@@ -146,8 +145,9 @@ const TokenPage = () => {
       : data;
   };
   useEffect(() => {
+    console.log("Hello2");
     setTimeout(() => {
-      const filteredData = filterData(defaultData, filters);
+      const filteredData = filterData(sells, filters);
       const searchFilteredData = searchfilterData(filteredData, searchFilter);
       const sortedData = sortData(searchFilteredData, sortKey);
       const numberFilter = getNumberOfFilters(filters);
@@ -155,7 +155,7 @@ const TokenPage = () => {
       setSortedData(sortedData);
       setLoading(false);
     }, 1500);
-  }, [defaultData, filters, sortDirection, searchFilter]);
+  }, [filters, sortDirection, searchFilter, isLoading]);
   const updateInputValues = (values: TokenFilterProps): void => {
     setFilters(values);
     setLoading(true);
@@ -167,14 +167,7 @@ const TokenPage = () => {
     setSortKey(column);
     setLoading(true);
   };
-  const handleClickToken = (id: string) => {
-    router.push(`/tokens/${id}`);
-  };
-  useEffect(() => {
-    setDefaultData(sells);
-    setSortedData(sells);
-    setLoading(isLoading);
-  }, [sells, isLoading]);
+
   return (
     <div className="py-8 flex flex-col  gap-2">
       <div className="border border-border rounded-md h-48 mx-3 flex items-center justify-center">
@@ -270,25 +263,6 @@ const TokenPage = () => {
               </th>
               <th
                 className="border border-border cursor-pointer hover:text-primary  group select-none"
-                onClick={() => handleSort("sol_amount")}
-              >
-                <span className="flex flex-row items-center gap-1 justify-center">
-                  {sortDirection["sol_amount"] === "asc" ? (
-                    <FaArrowUp
-                      size={14}
-                      className="group-hover:opacity-100 opacity-0"
-                    />
-                  ) : (
-                    <FaArrowDown
-                      size={14}
-                      className="group-hover:opacity-100 opacity-0"
-                    />
-                  )}
-                  SOL Received
-                </span>
-              </th>
-              <th
-                className="border border-border cursor-pointer hover:text-primary  group select-none"
                 onClick={() => handleSort("token_amount")}
               >
                 <span className="flex flex-row items-center gap-1 justify-center">
@@ -306,6 +280,26 @@ const TokenPage = () => {
                   Tokens Sold
                 </span>
               </th>
+              <th
+                className="border border-border cursor-pointer hover:text-primary  group select-none"
+                onClick={() => handleSort("sol_amount")}
+              >
+                <span className="flex flex-row items-center gap-1 justify-center">
+                  {sortDirection["sol_amount"] === "asc" ? (
+                    <FaArrowUp
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  ) : (
+                    <FaArrowDown
+                      size={14}
+                      className="group-hover:opacity-100 opacity-0"
+                    />
+                  )}
+                  SOL Received
+                </span>
+              </th>
+
               <th
                 className="border border-border cursor-pointer hover:text-primary  group select-none"
                 onClick={() => handleSort("token_burnt")}
@@ -347,116 +341,111 @@ const TokenPage = () => {
             </tr>
           </thead>
           <tbody>
-            {loading ? (
-              Array(20)
-                .fill(null)
-                .map((_, index) => (
-                  <tr
-                    key={index}
-                    className={clsx("border-b-1 border-b-border")}
-                  >
-                    <td className="py-4">
-                      <Skeleton height={16} />
-                    </td>
-                    <td className="py-4">
-                      <Skeleton height={16} />
-                    </td>
-                    <td>
-                      <Skeleton height={16} />
-                    </td>
-                    <td>
-                      <Skeleton height={16} />
-                    </td>
-                    <td>
-                      <Skeleton height={16} />
-                    </td>
-                    <td>
-                      <Skeleton height={16} />
-                    </td>
-                    <td>
-                      <Skeleton height={16} />
-                    </td>
-                    <td>
-                      <Skeleton height={16} />
-                    </td>
-                  </tr>
-                ))
-            ) : sortedData.length != 0 ? (
-              sortedData?.map((v: Sell, index) => {
-                return (
-                  <motion.tr
-                    key={v.id}
-                    className={clsx(
-                      index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
-                      "border-b-1 border-b-border cursor-pointer"
-                    )}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    // onClick={() => handleClickToken(v.id)}
-                  >
-                    <td
+            {isLoading || sortedData.length == 0
+              ? Array(20)
+                  .fill(null)
+                  .map((_, index) => (
+                    <tr
+                      key={index}
+                      className={clsx("border-b-1 border-b-border")}
+                    >
+                      <td className="py-4">
+                        <Skeleton height={16} />
+                      </td>
+                      <td className="py-4">
+                        <Skeleton height={16} />
+                      </td>
+                      <td>
+                        <Skeleton height={16} />
+                      </td>
+                      <td>
+                        <Skeleton height={16} />
+                      </td>
+                      <td>
+                        <Skeleton height={16} />
+                      </td>
+                      <td>
+                        <Skeleton height={16} />
+                      </td>
+                      <td>
+                        <Skeleton height={16} />
+                      </td>
+                      <td>
+                        <Skeleton height={16} />
+                      </td>
+                    </tr>
+                  ))
+              : sortedData.length != 0 &&
+                sortedData?.map((v: Sell, index) => {
+                  return (
+                    <motion.tr
+                      key={v.id}
                       className={clsx(
-                        "border-b-1 border-b-border sticky left-0 z-10",
-                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor",
+                        "border-b-1 border-b-border cursor-pointer"
                       )}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      // onClick={() => handleClickToken(v.id)}
                     >
-                      {"NASDOG"}
-                    </td>
-                    <td
-                      className="cursor-pointer"
-                      onClick={() => {
-                        navigator.clipboard
-                          .writeText(v.token_address)
-                          .then(() => {
-                            toast.success("Copied.");
-                          })
-                          .catch((err) => {
-                            console.error("Failed to copy: ", err);
-                          });
-                      }}
-                    >
-                      {truncAddress(v.token_address)}
-                    </td>
-                    <td
-                      className={clsx(
-                        "border-b-1 border-b-border sticky right-0 z-10 flex justify-center",
-                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
-                      )}
-                    >
-                      {moment(v.sell_at, "YYYY-MM-DD").format("MMMM Do, YYYY")}
-                    </td>
-                    <td>{formatCurrency(v.sol_amount, 9)}</td>
-                    <td>{formatCurrency(v.token_amount, 6)}</td>
-                    <td>{Number(0).toLocaleString()}</td>
-                    <td
-                      className={clsx(
-                        Number(0) > 60 ? "text-highColor" : "text-lowColor"
-                      )}
-                    >
-                      {Number(0).toLocaleString()}
-                    </td>
-                    <td
-                      className="cursor-pointer hover:underline"
-                      onClick={() => {
-                        window.open(
-                          `https://explorer.solana.com/tx/${v.tx_id}?cluster=devnet`
-                        );
-                      }}
-                    >
-                      {truncAddress(v.tx_id)}
-                    </td>
-                  </motion.tr>
-                );
-              })
-            ) : (
-              <tr className="border-b-1 border-b-border bg-evenColor">
-                <td colSpan={8} className="min-h-screen">
-                  No data
-                </td>
-              </tr>
-            )}
+                      <td
+                        className={clsx(
+                          "border-b-1 border-b-border sticky left-0 z-10",
+                          index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
+                        )}
+                      >
+                        {"NASDOG"}
+                      </td>
+                      <td
+                        className="cursor-pointer"
+                        onClick={() => {
+                          navigator.clipboard
+                            .writeText(v.token_address)
+                            .then(() => {
+                              toast.success("Copied.");
+                            })
+                            .catch((err) => {
+                              console.error("Failed to copy: ", err);
+                            });
+                        }}
+                      >
+                        {truncAddress(v.token_address)}
+                      </td>
+                      <td
+                        className={clsx(
+                          "border-b-1 border-b-border sticky right-0 z-10 flex justify-center",
+                          index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
+                        )}
+                      >
+                        {moment(v.sell_at, "YYYY-MM-DD").format(
+                          "MMMM Do, YYYY"
+                        )}
+                      </td>
+                      <td>{formatCurrency(v.token_amount, 6)}</td>
+                      <td>{formatCurrency(v.sol_amount, 9)}</td>
+                      <td>{Number(0).toLocaleString()}</td>
+                      <td
+                        className={clsx(
+                          Number(0) > 60 ? "text-highColor" : "text-lowColor"
+                        )}
+                      >
+                        {Number(0).toLocaleString()}
+                      </td>
+                      <td
+                        className="cursor-pointer hover:underline"
+                        onClick={() => {
+                          window.open(
+                            `https://explorer.solana.com/tx/${v.tx_id}?cluster=devnet`
+                          );
+                        }}
+                      >
+                        {truncAddress(v.tx_id)}
+                      </td>
+                    </motion.tr>
+                  );
+                })}
           </tbody>
         </motion.table>
       </div>
