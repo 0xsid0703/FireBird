@@ -16,6 +16,7 @@ import { getSellsPublic } from "@/services/treasury";
 import { Sell } from "@/types/sell";
 import moment from "moment";
 import { toast } from "react-toastify";
+import { formatCurrency } from "@/utils/currency";
 type TokenFilterProps = {
   sol_amount: [string, string];
   token_amount: [string, string];
@@ -237,8 +238,8 @@ const TokenPage = () => {
               >
                 Token Address
               </th>
-              <th colSpan={2} className="border border-border">
-                Inside Firebird Protocol
+              <th colSpan={3} className="border border-border">
+                Sell
               </th>
               <th colSpan={2} className="border border-border">
                 Burnt
@@ -246,14 +247,14 @@ const TokenPage = () => {
               <th rowSpan={2} className="border border-border">
                 Transactions
               </th>
+            </tr>
+            <tr className="text-gray-500 text-base">
               <th
                 rowSpan={2}
                 className="border border-border sticky right-0 z-10 bg-background"
               >
-                Sell At
+                Sold At
               </th>
-            </tr>
-            <tr className="text-gray-500 text-base">
               <th
                 className="border border-border cursor-pointer hover:text-primary  group select-none"
                 onClick={() => handleSort("sol_amount")}
@@ -405,8 +406,16 @@ const TokenPage = () => {
                     >
                       {truncAddress(v.token_address)}
                     </td>
-                    <td>{Number(v.sol_amount).toLocaleString()}</td>
-                    <td>{Number(v.token_amount).toLocaleString()}</td>
+                    <td
+                      className={clsx(
+                        "border-b-1 border-b-border sticky right-0 z-10 flex justify-center",
+                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
+                      )}
+                    >
+                      {moment(v.sell_at, "YYYY-MM-DD").format("MMMM Do, YYYY")}
+                    </td>
+                    <td>{formatCurrency(v.sol_amount, 9)}</td>
+                    <td>{formatCurrency(v.token_amount, 6)}</td>
                     <td>{Number(0).toLocaleString()}</td>
                     <td
                       className={clsx(
@@ -424,14 +433,6 @@ const TokenPage = () => {
                       }}
                     >
                       {truncAddress(v.tx_id)}
-                    </td>
-                    <td
-                      className={clsx(
-                        "border-b-1 border-b-border sticky right-0 z-10 flex justify-center",
-                        index % 2 === 0 ? "bg-evenColor" : "bg-oddColor"
-                      )}
-                    >
-                      {moment(v.sell_at, "YYYY-MM-DD").format("MMMM Do, YYYY")}
                     </td>
                   </motion.tr>
                 );
